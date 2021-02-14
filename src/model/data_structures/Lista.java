@@ -3,16 +3,26 @@ package model.data_structures;
 public class Lista <T extends Comparable<T>> implements ILista<T>
 {
 
-	private Nodo<T> next;
+	private Nodo<T> first;
 	private int size = 0;
 	
 	public Lista()
 	{
 		
 	}
+	
+	public Lista(T elem)
+	{
+		first = new Nodo<T>(elem);
+	}
 	@Override
 	public void addFirst(T elem) {
-		
+		Nodo<T> nuevo = new Nodo<T>(elem);
+		if(first != null)
+		{
+			first = nuevo;
+		}
+		nuevo.cambiarSiguiente(first);
 		
 	}
 
