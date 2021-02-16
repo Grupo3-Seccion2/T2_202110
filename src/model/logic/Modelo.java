@@ -19,7 +19,7 @@ import model.data_structures.Lista;
  * Definicion del modelo del mundo
  *
  */
-public class Modelo <T extends Comparable<T>> implements IArregloDinamico<T>
+public class Modelo 
 {
 	/**
 	 * Atributos del modelo del mundo
@@ -110,7 +110,7 @@ public class Modelo <T extends Comparable<T>> implements IArregloDinamico<T>
 		SimpleDateFormat format =new SimpleDateFormat("MM dd, yyyy");
 		try
 		{
-			Reader in = new FileReader("");
+			Reader in = new FileReader("/T2_202110/data/videos-all.csv");
 			Iterable<CSVRecord> records = CSVFormat.RFC4180.parse(in);
 			for(CSVRecord record : records)
 			{
@@ -131,7 +131,7 @@ public class Modelo <T extends Comparable<T>> implements IArregloDinamico<T>
 		SimpleDateFormat format =new SimpleDateFormat("MM dd, yyyy");
 		try
 		{
-			Reader in = new FileReader("");
+			Reader in = new FileReader("/T2_202110/data/videos-all.csv");
 			Iterable<CSVRecord> records = CSVFormat.RFC4180.parse(in);
 			for(CSVRecord record : records)
 			{

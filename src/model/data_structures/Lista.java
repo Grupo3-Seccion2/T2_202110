@@ -81,9 +81,9 @@ public class Lista <T extends Comparable<T>> implements ILista<T>
 	}
 
 	@Override
-	public boolean isPresent() {
+	public boolean isEmpty() {
 		
-		return false;
+		return size == 0;
 	}
 
 	@Override

@@ -22,7 +22,7 @@ public interface ILista <T extends Comparable<T>>
 	
 	public int size();
 	
-	public boolean isPresent();
+	public boolean isEmpty();
 	
 	public int isPresent(T element);
 	
