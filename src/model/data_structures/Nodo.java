@@ -5,10 +5,10 @@ public class Nodo <T extends Comparable<T>>
 	private T element;
 	private Nodo<T> next;
 	
-	public Nodo(T e, Nodo<T> p, Nodo<T> n)
+	public Nodo(T e)
 	{
 		element = e; 
-		next = n;
+		next = null;
 	}
 	
 	public T getElement()

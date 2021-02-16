@@ -22,11 +22,9 @@ public interface ILista <T extends Comparable<T>>
 	
 	public int size();
 	
-	public boolean isPresent();
-	
 	public int isPresent(T element);
 	
 	public void exchange(int pos1, int pos2);
 	
-	public void changeInfo(int pos, T elem);
+	public void changeElement(int pos, T elem);
 }
