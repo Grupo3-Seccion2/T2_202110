@@ -22,6 +22,8 @@ public interface ILista <T extends Comparable<T>>
 	
 	public int size();
 	
+	public boolean isEmpty();
+	
 	public int isPresent(T element);
 	
 	public void exchange(int pos1, int pos2);

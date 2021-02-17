@@ -22,7 +22,7 @@ public class Controller {
 		view = new View();
 		modelo = new Modelo();
 	}
-		
+	/**	
 	public void run() 
 	{
 		Scanner lector = new Scanner(System.in);
@@ -102,5 +102,6 @@ public class Controller {
 			}
 		}
 		
-	}	
+	}
+	**/	
 }

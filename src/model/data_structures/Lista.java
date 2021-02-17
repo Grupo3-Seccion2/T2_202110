@@ -4,6 +4,7 @@ public class Lista <T extends Comparable<T>> implements ILista<T>
 {
 
 	private Nodo<T> first;
+
 	private Nodo<T> last;
 	private int size;
 	
@@ -13,7 +14,13 @@ public class Lista <T extends Comparable<T>> implements ILista<T>
 		last = null;
 		size = 0;
 	}
+	
+	public Lista(T elem)
+	{
+		first = new Nodo<T>(elem);
+	}
 	@Override
+
 	public void addFirst(T elem) 
 	{
 		Nodo<T> nuevo = new Nodo<T>(elem);
@@ -24,10 +31,11 @@ public class Lista <T extends Comparable<T>> implements ILista<T>
 		}
 		else
 		{
-			nuevo.setNext(first);
+			nuevo.cambiarSiguiente(first);
 			first = nuevo;
 		}
 		size++;
+
 	}
 
 	@Override
@@ -37,12 +45,13 @@ public class Lista <T extends Comparable<T>> implements ILista<T>
 		if (first == null)
 		{
 			first = nuevo;
-			last = nuevo;
+	
 		}
 		else
 		{
-			last.setNext(nuevo);
+			last.cambiarSiguiente(nuevo);
 		}
+		last = nuevo;
 		size++;
 	}
 
@@ -69,7 +78,7 @@ public class Lista <T extends Comparable<T>> implements ILista<T>
 		{
 			
 		}	
-		return eliminado.getElement() ;
+		return eliminado.darElemento() ;
 	}
 
 	@Override
@@ -89,13 +98,13 @@ public class Lista <T extends Comparable<T>> implements ILista<T>
 	@Override
 	public T firstElement() {
 		
-		return first.getElement();
+		return first.darElemento();
 	}
 
 	@Override
 	public T lastElement() {
 		
-		return last.getElement();
+		return last.darElemento();
 	}
 
 	@Override
@@ -112,6 +121,13 @@ public class Lista <T extends Comparable<T>> implements ILista<T>
 		return size;
 	}
 
+
+	@Override
+	public boolean isEmpty() 
+	{
+		
+		return size == 0;
+	}
 
 	@Override
 	public int isPresent(T element) 

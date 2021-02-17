@@ -7,23 +7,31 @@ public class Nodo <T extends Comparable<T>>
 	
 	public Nodo(T e)
 	{
+
 		element = e; 
 		next = null;
+
+		this.element = e; 
+
 	}
 	
-	public T getElement()
+	public void cambiarElemento(T elem)
 	{
-		return element;
+		this.element = elem;
 	}
 	
-	public Nodo<T> getNext()
+	public Nodo<T> darSiguiente()
 	{
 		return next;
 	}
 	
-	
-	public void setNext(Nodo<T> n)
+	public T darElemento()
 	{
-		next = n;
+		return element;
+	}
+	
+	public void cambiarSiguiente(Nodo<T> sig)
+	{
+		next = sig;
 	}
 }
