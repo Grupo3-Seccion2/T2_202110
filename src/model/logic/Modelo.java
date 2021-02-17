@@ -11,29 +11,38 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
 import model.data_structures.ArregloDinamico;
-import model.data_structures.IArregloDinamico;
 import model.data_structures.ILista;
 import model.data_structures.Lista;
-
+ 
 /**
  * Definicion del modelo del mundo
  *
  */
-public class Modelo 
+public class Modelo <T extends Comparable<T>>
 {
 	/**
 	 * Atributos del modelo del mundo
 	 */
-	private IArregloDinamico<Video> videosArreglo;
+	private ArregloDinamico<Video> videosArreglo;
 	
-	private ILista<Video> videosLista;
+	private Lista<Video> videosLista;
+	
+	private int tipoLista;
 	
 	/**
 	 * Constructor del modelo del mundo con capacidad predefinida
 	 */
 	public Modelo()
 	{
-		
+		videosLista = new Lista<>();
+		try 
+		{
+			cargarDatosLista();
+		}
+		catch (Exception e)
+		{	
+		}
+		tipoLista = 1;
 	}
 	
 	/**
@@ -43,7 +52,14 @@ public class Modelo
 	public Modelo(int capacidad)
 	{
 		videosArreglo = new ArregloDinamico<>(capacidad);
-		videosLista = new Lista<>();
+		try 
+		{
+			cargarDatosArreglo();
+		}
+		catch (Exception e)
+		{	
+		}
+		tipoLista = 2;
 	}
 	
 	/**
@@ -52,57 +68,51 @@ public class Modelo
 	 */
 	public int darTamano()
 	{
-		return videosArreglo.darTamano();
+		return tipoLista==1? videosLista.size():videosArreglo.size();
 	}
 
 	
-//	/**
-//	 * Requerimiento de agregar dato
-//	 * @param dato
-//	 */
-//	public void agregar(T dato)
-//	{	
-//		datos.agregar((String) dato);
-//	}
-//	
-//	/**
-//	 * Requerimiento buscar dato
-//	 * @param dato Dato a buscar
-//	 * @return dato encontrado
-//	 */
-//	public T buscar(Comparable dato)
-//	{
-//		return (T) datos.buscar((String) dato);
-//	}
-//	
-//	/**
-//	 * Requerimiento eliminar dato
-//	 * @param dato Dato a eliminar
-//	 * @return dato eliminado
-//	 */
-//
-//	public T eliminar(Comparable dato)
-//	{
-//		return (T) datos.eliminar((String) dato);
-//	}
-//
-//	@Override
-//	public int darCapacidad() {
-//		// TODO Auto-generated method stub
-//		return (int) datos.darCapacidad();
-//	}
-//
-//	@Override
-//	public T darElemento(int i) {
-//		// TODO Auto-generated method stub
-//		return (T) datos.darElemento(i);
-//	}
-//
-//	@Override
-//	public void invertir() {
-//		// TODO Auto-generated method stub
-//		datos.invertir();
-//	}
+	/**
+	 * Requerimiento de agregar dato
+	 * @param dato
+	*/
+	public void agregar(Video dato, int pos)
+	{	if (tipoLista ==1)
+		 videosLista.insertElement(dato, pos);
+	    else
+		 videosArreglo.insertElement(dato, pos);
+	}
+	
+	/**
+	 * Requerimiento buscar dato
+	 * @param dato Dato a buscar
+	 * @return dato encontrado
+	 */
+	public Video buscar(int pos)
+	{
+		return tipoLista ==1 ? videosLista.getElement(pos):  videosArreglo.getElement(pos) ;
+	}
+	
+	/**
+	 * Requerimiento eliminar dato
+	 * @param dato Dato a eliminar
+	 * @return dato eliminado
+	 */
+
+	public Video eliminar(int pos)
+	{
+		return tipoLista ==1 ? videosLista.deleteElement(pos):  videosArreglo.deleteElement(pos) ;
+	}
+
+	public Video darPrimero()
+	{
+		return tipoLista ==1 ? videosLista.firstElement():  videosArreglo.firstElement() ;
+	}
+	public Video darUltimo()
+	{
+		return tipoLista ==1 ? videosLista.lastElement():  videosArreglo.lastElement() ;
+	}
+	
 
 	public void cargarDatosArreglo() throws NumberFormatException, ParseException
 	{
@@ -115,9 +125,9 @@ public class Modelo
 			for(CSVRecord record : records)
 			{
 				video = new Video(Integer.parseInt(record.get(0)), format.parse(record.get(1)), record.get(2), record.get(3), Integer.parseInt(record.get(4)), format.parse(record.get(5)), record.get(6), Integer.parseInt(record.get(7)), Integer.parseInt(record.get(8)), Integer.parseInt(record.get(9)), record.get(10));
-				videosArreglo.agregar(video);
+				videosArreglo.addFirst(video);
 			}
-			System.out.println("Datos cargados "+ videosArreglo.darTamano());
+			System.out.println("Datos cargados "+ videosArreglo.size());
 		}
 		catch (IOException e) 
 		{

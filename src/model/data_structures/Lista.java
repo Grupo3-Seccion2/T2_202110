@@ -58,16 +58,33 @@ public class Lista <T extends Comparable<T>> implements ILista<T>
 	@Override
 	public void insertElement(T elem, int pos) 
 	{
-		Nodo<T> nuevo = new Nodo<T>(elem);
+		
 		if(pos== size)
 		{
 			addLast(elem);
 		}
-		else
+		else if(pos == 1)
 		{
-			Nodo<T> anterior = first;
+			addFirst(elem);
 			
 		}
+		else
+		{
+			Nodo<T> nuevo = new Nodo<T>(elem);
+			Nodo<T> anterior = first;
+			int i = 1;
+			
+			while(anterior!= null && i!= pos)
+			{
+				anterior = anterior.darSiguiente();
+				i++;
+			}
+			
+			nuevo.cambiarSiguiente(anterior.darSiguiente());
+			anterior.cambiarSiguiente(nuevo);
+			size++;
+		}
+		
 	}
 
 	@Override
@@ -76,33 +93,69 @@ public class Lista <T extends Comparable<T>> implements ILista<T>
 		Nodo<T> eliminado = first;
 		if(first != null)
 		{
-			
+			Nodo<T> nuevoPrimero = first.darSiguiente();
+			first = nuevoPrimero;
 		}	
+		size--;
 		return eliminado.darElemento() ;
 	}
 
 	@Override
 	public T removeLast() 
 	{
-		
-		return null;
+		Nodo<T> eliminado = last;
+		if(last != null)
+		{ 
+			last = null;
+		}	
+		size--;
+		return eliminado.darElemento() ;
 	}
 
 	@Override
 	public T deleteElement(int pos) 
 	{
 		
-		return null;
+		Nodo<T> eliminado = null;
+		if(pos== size)
+		{
+			eliminado = last;
+			removeLast();
+		}
+		else if(pos == 1)
+		{
+			eliminado = first;
+			removeFirst();
+			
+		}
+		else
+		{
+			Nodo<T> anterior = first;
+			int i = 1;
+			
+			while(anterior!= null && i!= pos)
+			{
+				anterior = anterior.darSiguiente();
+				i++;
+			}
+			eliminado = anterior.darSiguiente();
+			anterior.cambiarSiguiente(anterior.darSiguiente().darSiguiente());
+			size--;
+		}
+		
+		return eliminado.darElemento();
 	}
 
 	@Override
-	public T firstElement() {
+	public T firstElement() 
+	{
 		
 		return first.darElemento();
 	}
 
 	@Override
-	public T lastElement() {
+	public T lastElement() 
+	{
 		
 		return last.darElemento();
 	}
@@ -110,8 +163,23 @@ public class Lista <T extends Comparable<T>> implements ILista<T>
 	@Override
 	public T getElement(int pos) 
 	{
+		T buscado = null;
+		if(pos ==1)
+			buscado = first.darElemento();
+		else if (pos == size)
+			buscado = last.darElemento();
+		else
+		{
+			Nodo<T> anterior = first;
+			int i = 1;
 		
-		return null;
+			while(anterior!= null && i!= pos)
+			{
+				anterior = anterior.darSiguiente();
+				i++;
+			}
+		}
+		return buscado;
 	}
 
 	@Override
@@ -132,8 +200,18 @@ public class Lista <T extends Comparable<T>> implements ILista<T>
 	@Override
 	public int isPresent(T element) 
 	{
-		
-		return 0;
+		Nodo<T> actual = first;
+		int pos = -1;
+		int i = 1;
+		while(actual!= null && pos == -1)
+		{
+			if (actual.darElemento().compareTo(element)==0)
+				pos = i;
+			actual = actual.darSiguiente();
+			i++;
+			
+		}
+		return pos;
 	}
 
 	@Override

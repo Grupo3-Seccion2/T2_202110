@@ -22,7 +22,7 @@ public class Controller {
 		view = new View();
 		modelo = new Modelo();
 	}
-	/**	
+
 	public void run() 
 	{
 		Scanner lector = new Scanner(System.in);
@@ -36,60 +36,66 @@ public class Controller {
 			int option = lector.nextInt();
 			switch(option){
 				case 1:
-					view.printMessage("--------- \nCrear Arreglo \nDar capacidad inicial del arreglo: ");
+					view.printMessage("--------- \nCrear Lista \n Si quiere que se trabaje como un arreglo indique la capacidad inicial. Sino ingrese 0: ");
 				    int capacidad = lector.nextInt();
-				    modelo = new Modelo(capacidad); 
-				    view.printMessage("Arreglo Dinamico creado");
-				    view.printMessage("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
+				    if(capacidad == 0)
+				    	modelo = new Modelo(); 
+				    else
+				    	modelo = new Modelo(capacidad); 
+				    view.printMessage("Lista creada");
+				    view.printMessage("Numero actual de elementos " + modelo.darTamano() + "\n---------");	
+				    view.printMessage("El primer elemento de la lista es: "+ modelo.darPrimero());
+				    view.printMessage("El ultimo elemento de la lista es: "+ modelo.darUltimo());
+				    
 					break;
 
-				case 2:
-					view.printMessage("--------- \nDar cadena (simple) a ingresar: ");
-					dato = lector.next();
-					modelo.agregar(dato);
-					view.printMessage("Dato agregado");
-					view.printMessage("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
-					break;
+				//case 2:
+				//	view.printMessage("--------- \nDar cadena (simple) a ingresar: ");
+				//	dato = lector.next();
+				//	modelo.agregar(dato);
+				//	view.printMessage("Dato agregado");
+				//	view.printMessage("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
+				//	break;
 
-				case 3:
-					view.printMessage("--------- \nDar cadena (simple) a buscar: ");
-					dato = lector.next();
-					respuesta = (String) modelo.buscar(dato);
-					if ( respuesta != null)
-					{
-						view.printMessage("Dato encontrado: "+ respuesta);
-					}
-					else
-					{
-						view.printMessage("Dato NO encontrado");
-					}
-					view.printMessage("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
-					break;
+				//case 3:
+				//	view.printMessage("--------- \nDar cadena (simple) a buscar: ");
+				//	dato = lector.next();
+				//	respuesta = (String) modelo.buscar(dato);
+				//	if ( respuesta != null)
+				//	{
+				//		view.printMessage("Dato encontrado: "+ respuesta);
+				//	}
+				//	else
+				//	{
+				//		view.printMessage("Dato NO encontrado");
+				//	}
+				//	view.printMessage("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
+				//	break;
 
-				case 4:
-					view.printMessage("--------- \nDar cadena (simple) a eliminar: ");
-					dato = lector.next();
-					respuesta = (String) modelo.eliminar(dato);
-					if ( respuesta != null)
-					{
-						view.printMessage("Dato eliminado "+ respuesta);
-					}
-					else
-					{
-						view.printMessage("Dato NO eliminado");							
-					}
-					view.printMessage("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
-					break;
+				//case 4:
+				//	view.printMessage("--------- \nDar cadena (simple) a eliminar: ");
+				//	dato = lector.next();
+				//	respuesta = (String) modelo.eliminar(dato);
+				//	if ( respuesta != null)
+				//	{
+				//		view.printMessage("Dato eliminado "+ respuesta);
+				//	}
+				//	else
+				//	{
+				//		view.printMessage("Dato NO eliminado");							
+				//	}
+				//	view.printMessage("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
+				//	break;
 
-				case 5: 
-					view.printMessage("--------- \nContenido del Arreglo: ");
-					view.printModelo(modelo);
-					view.printMessage("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
-					break;	
+			//	case 5: 
+			//		view.printMessage("--------- \nContenido del Arreglo: ");
+			//		view.printModelo(modelo);
+			//		view.printMessage("Numero actual de elementos " + modelo.darTamano() + "\n---------");						
+			//		break;	
 					
-				case 6:
-					view.printMessage("--------- \nInvertir arreglo: ");
-					break;
+			//	case 6:
+			//		view.printMessage("--------- \nInvertir arreglo: ");
+			//		break;
 				case 7: 
 					view.printMessage("--------- \n Hasta pronto !! \n---------"); 
 					lector.close();
@@ -103,5 +109,4 @@ public class Controller {
 		}
 		
 	}
-	**/	
 }

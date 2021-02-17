@@ -97,8 +97,16 @@ public class Video implements Comparable<Video>
 	}
 
 	@Override
-	public int compareTo(Video o) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int compareTo(Video o) 
+	{
+		int i =-1;
+		if (this.trendingDate.equals(o.trendingDate))
+				i = 0;
+		return i;
+	}
+	
+	public String toString()
+	{
+		return title + title;
 	}
 }
